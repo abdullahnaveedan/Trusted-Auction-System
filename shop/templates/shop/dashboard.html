@@ -1,0 +1,65 @@
+{% extends 'shop/data.html' %}
+{% block title%} Dashboard {% endblock %}
+
+{%block css%} 
+.main{
+    height:15vh;
+}
+.tbl,.tbl2
+{
+    background:#84FF00;
+    color:#0056B3;
+    padding:2rem;
+    border-radius:15px;
+    width:40%;
+}
+.tbl2
+{
+    background:url('/static/shop/image.jpg');
+    color:#84FF00;
+}
+.tbl2 h1,.tbl2 h3{
+    font-weight:bold;
+}
+{%endblock%}
+{% block bufferbody %}
+<div class="d-flex ">
+    <div class="tbl mt-4 pt-4">
+        <h1>Email</h1>
+        <h3>{{email}}</h3>
+    </div>
+    
+    <div class="tbl mt-4 pt-4 mx-4">
+        <h1>My Earning</h1>
+        <h3>$ {{earn}}.00</h3>
+    </div>
+</div>
+
+<div class="d-flex ">
+    <div class="tbl2 mt-4 pt-4">
+        <h1>Total Bids</h1>
+        <h3>{{bids}}</h3>
+    </div>
+    
+    <div class="tbl2 mt-4 pt-4 mx-4">
+        <h1>My Products</h1>
+        <h3>{{product}}</h3>
+    </div>    
+</div>
+
+<div class="d-flex ">
+    <div class="tbl2 mt-4 pt-4">
+        <h1>Pending Results</h1>
+        <h3>{{bids}}</h3>
+    </div>
+    
+    <div class="tbl2 mt-4 pt-4 mx-4">
+        <h1>Winner in </h1>
+        <h3>{{win}}</h3>
+    </div>
+</div>
+
+
+
+
+{% endblock bufferbody %}

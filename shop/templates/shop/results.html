@@ -1,0 +1,44 @@
+{% extends 'shop/data.html' %}
+
+{% block title%} Results {% endblock %}
+
+{% block bufferbody %}
+
+{% if count == 0 %}
+    <div style="text-align: center;margin-top: 200px;">
+        <h1>Plz Upload Your Product.</h1>
+        <a class="btn btn-success mt-4" href="/shop/sellermode/">Click to Upload</a>
+    </div>
+{% else %}
+    <table class="table mt-4">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Actual Price</th>
+            <th>Total Bids</th>
+            <th>Max Bid Price</th>
+            <th>Close</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for i,j,k in zipp %}
+            <tr>
+                <th>{{forloop.counter}}</th>
+                <td>{{i.product_name}}</td>
+                <td>${{i.price}}.00</td>
+                <td>{{j}} bids</td>
+                <td>${{k}}.00</td>
+                <td><a class="btn btn-success text-white" href="/shop/results/{{i.id}}">&#10003;</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+        <p>{{i.product_name}}</p>
+    
+{% endif %}
+
+
+{% endblock bufferbody %}

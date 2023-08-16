@@ -1,0 +1,67 @@
+{% extends 'shop/data.html' %} {% block title%} Seller {% endblock %} 
+
+{% block css%} 
+.main{
+    height:15vh;
+}
+input, .form-label-group > label {
+    height: 3.125rem;
+    padding: 0.75rem;
+}
+.group
+{
+    padding: 1rem;
+}
+
+{%endblock%}
+
+{%block bufferbody%}
+<div class="container">
+
+
+    <form class="form-signin container " action="/shop/productdata/" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="container p-4">
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Product Name : </h3>
+                <input type="text" name="name" class="form-control w-25" placeholder="Product Name" required autofocus/>
+            </div>
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Email : </h3>
+                <input type="email" name="email" class="form-control w-25" value="{{email}}" readonly required autofocus/>
+            </div>
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Catagory : </h3>
+                <input type="text" name="catagory" class="form-control w-25" placeholder="Product Catagory" required autofocus/>
+            </div>
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Sub_Catagory : </h3>
+                <input type="text" name="subcatagory" class="form-control w-25" placeholder="Product subCatagory" required autofocus/>
+            </div>
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Description : </h3>
+                <input type="text"  name="desc" class="form-control w-25" placeholder="Product Description" required autofocus/>
+            </div>
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Start Bid from : </h3>
+                <input type="number" name="price" class="form-control w-25" placeholder="Price" required autofocus/>
+            </div>
+            <div class="form-label-group group d-flex">
+                <h3 class="mx-4">Image : </h3>
+                <input type="file" name="image" accept="image/*" class="form-control w-25" value="Uplaod Image" autofocus/>
+            </div>
+            
+            
+                
+            <br><br>
+            <center>
+                <button class="btn btn-lg btn-primary btn-block w-50 p-4" type="submit">Submit for Approval</button>
+            </center>
+        </div>
+
+    </form>
+
+</div>
+
+
+{%endblock%}

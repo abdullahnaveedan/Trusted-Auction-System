@@ -1,0 +1,60 @@
+{% extends 'shop/data.html' %}
+{% block title%} MyBids {% endblock %}
+{% block bufferbody %}
+<div class="table-responsive tables">
+    {% if countda == 0 %}
+      <h1 style="margin-left:25rem;margin-top:12rem">No Record to show</h1>
+    {%else%}
+        <h1 class="mt-4">Pending Bids</h1>
+        <table class="table table-striped table-sm mt-4">
+        <thead>
+            <tr>
+            <th>#</th>
+            <th>Product id</th>
+            <th>Place Auction</th>
+            <th>Results</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prd in bidding %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>Product Number {{prd.pid}}</td>
+                <td>${{prd.bprice}}.00</td>
+                <td class="btn btn-info text-white">InProcess..</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    {%endif%}
+    
+        <h1 class="mt-4">Wining History</h1>
+        {% if countobj == 0 %}
+            <center><h3>No History Found</h3></center>
+        {% else %}
+            <table class="table table-striped table-sm mt-4">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Owner Email</th>
+                    <th>Phone Number</th>
+                    <th>Price To Paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for prd in objs %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{prd.productname}}</td>
+                        <td>{{prd.owneremail}}</td>
+                        <td>{{prd.phonenumber}}</td>
+                        <td class=" btn btn-success text-white">$ {{prd.price}}.00</td>
+                    </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+        {% endif %}
+    </div>
+
+{% endblock bufferbody %}

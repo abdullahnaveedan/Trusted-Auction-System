@@ -1,0 +1,62 @@
+{% extends 'shop/inheritance.html' %} {% block title%} Contact {%endblock%}
+{%block css%} 
+.main 
+{ 
+  height: 20vh; 
+} 
+h1
+{
+  font-family:fantasy;
+}
+{%endblock%} 
+
+{%block navbar%}
+
+{%endblock%} 
+{%block body%}
+<h1 class="text-center mt-4">Contact US</h1>
+
+<form class="form-signin container-fluid p-4 m-4" method="POST" action="/shop/contactform"> {% csrf_token %}
+  <div class="container">
+    <div class="form-label-group group m-4 w-50">
+      <input
+        type="email"
+        id="inputEmail"
+        name = "email"
+        class="form-control m-4 w-75"
+        placeholder="Email address"
+        required
+        autofocus
+      />
+    </div>
+
+    <div class="form-label-group group m-4 w-50">
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        class="form-control m-4 w-75"
+        placeholder="Subject"
+        required
+        autofocus
+      />
+    </div>
+
+    <div class="form-label-group m-4 w-100">
+      <textarea
+        type="text"
+        id="message"
+        name ="message"
+        class="form-control m-4 w-100"
+        rows="10"
+        placeholder="Place your issue here"
+        required
+      ></textarea>
+    </div>
+
+    <br /><br />
+    <button class="btn btn-lg btn-primary" type="submit">Send <i class="fa-sharp fa-solid fa-paper-plane" style="color: #ffffff;"></i></button>
+  </div>
+</form>
+
+{%endblock%}

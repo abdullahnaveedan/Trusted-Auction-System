@@ -1,0 +1,136 @@
+{% extends 'shop/inheritance.html'%} 
+{% block title %} TAS {% endblock%} 
+{% load static %}
+{%block css%} 
+.header h1
+    {
+      color:white;
+      font-weight: bolder;
+      font-family: arial black;
+      font-size: 50px;
+      display: flex;
+      justify-content: center;
+      padding-top: 120px;
+    }
+    .header p
+    {
+      color:white;
+      font-weight: bolder;
+      font-size: 18px;
+      padding-top: 20px;
+      width: 80%;
+      text-align: center;
+      margin-left: 80px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .button a 
+    {
+      width: 150px;
+      font-size: 18px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: none;
+      border-radius: 15px;
+      padding: 10px;
+    }
+    .button
+    {
+      padding-top: 100px;
+    }
+    .sections{
+      display: flex;
+      flex: 1;
+      padding-top: 10rem;
+      width: 80%;
+    }
+    .first,.second
+    {
+      width: 35%;
+      line-height: 2.5rem;
+      background: white;
+      padding-left: 1.2rem;
+      text-align: justify;
+      border-radius: 5px;
+    }
+    .first p,.second p
+    {
+
+      color:black;
+      font-size: 18px;
+    }
+    .first h1,.second h1
+    {
+      font-family: arail;
+      
+    }
+    .first
+    {
+      line-height: 3rem;
+    }
+    .dot
+    {
+      background-color: yellow;
+      color:yellow;
+      border-radius: 50px;
+    }
+    body{
+      background: rgb(244,244,244);
+      background: linear-gradient(90deg, rgba(244,244,244,1) 0%, rgba(198,198,198,1) 0%, rgba(255,254,254,1) 0%, rgba(136,136,136,1) 100%, rgba(8,8,8,1) 100%, rgba(0,0,0,1) 100%);
+    }
+   
+    
+{%endblock%} 
+
+{%block insidemain%} 
+<div class="container header">
+    <h1> <span class="auto"></span>AUCTION SYSTEM</h1>
+    <p>Secure Bids, Trusted Deals: Welcome to Our Trusted Auction System - A Safe Haven for Fair, Transparent, and Reliable Online Auctions!</p>
+  </div>
+
+  <div class="button">
+    <center>
+      <a href="#viewmore" class="btn btn-success ">View More</a>
+    </center>
+  </div>
+{%endblock%}
+
+{% block body%} 
+<div class="container-fluid sections" id="viewmore">
+    <div class="continer first">
+      <h1 class="text-success">Raise Money</h1>
+      <p>Auctria has all the features you need to run the event and auction from start to finish.</p>
+      <p><span class="dot">no</span> Silent, Live, Online</p>
+      <p><span class="dot">no</span> Mobile Bidding
+      </p>
+      <p><span class="dot">no</span> Tickets & Tables
+      </p>
+      <p><span class="dot">no</span> Sell & Recognize Sponsorships
+      </p>
+    </div>
+
+    <div class="container second flex-wrap">
+      <h1 class="text-success">Raise Awareness</h1>
+      <p>Each event has its very own website. A gallery of templates to start with. Use a themed template or start with a core template and modify from there.</p>
+      <p><span class="dot">no</span> Brand the Website
+      </p>
+      <p><span class="dot">no</span> Use Images and Video to Tell Your Story
+      </p>
+      <p><span class="dot">no</span> Use Social Media
+      </p>
+      <p><span class="dot">no</span> Use QR Code for Quick Access
+      </p>
+    </div>
+  </div>
+  <img src="{% static 'shop/banner.png' %}" alt="Image not found" width="90%" />
+
+{% endblock %}
+
+{%block js%}
+<script>
+    var typed = new Typed(".auto", {
+        strings: ["MarketPlace", "Trusted", "Secure"],
+        typeSpeed: 150,
+        backSpeed: 150,
+        loop:true
+        })
+</script>
+{%endblock%}

@@ -1,0 +1,39 @@
+{% extends 'shop/inheritance.html' %} {% block css %} .main{ height:15vh; } 
+{% endblock %} {% block body %}
+<div class="container-fluid">
+  <div class="row d-flex flex-nowrap">
+    <nav
+      style="height: 78vh; background: #ddd; line-height: 4rem"
+      class="col-md-2 d-none d-md-block bg-light sidebar pt-4">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a id="db" class="nav-link active" href="/shop/dashboard/">
+              Dashboard 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/shop/mybids/" >
+              My Bids
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/shop/sellermode/">
+              Upload Products 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/shop/results/">
+              Submit a bid
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      {% block bufferbody %}{% endblock bufferbody %}
+    </div>
+    </div>
+</div>
+  {% endblock %}
+

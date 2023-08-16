@@ -1,0 +1,159 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://nextsoftware.io/files/images/logos/main/django-logo.png"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>{% block title%} {% endblock %}</title>
+    {%load static%}
+    <style>
+      .nav {
+        padding-left:0;
+        
+        list-style: none;
+      }
+      .navbar-brand {
+        height: 100px;
+        padding: 41px 47px;
+        font-size: 50px;
+        line-height: 21px;
+        font-family: fantasy;
+      }
+  
+      .sp {
+        color: rgb(132, 255, 0);
+        font-family: fantasy;
+      }
+  
+      .navbar-nav li a{
+        font-size: larger;
+        border-radius: 10px;
+        width: 130px;
+        height: 50px;
+        text-align: center;
+        margin-left: 80px;
+        font-family: arial black;
+        color: white
+      }
+      ul
+      {
+        margin-top:16px;
+      }
+     .main {
+        background: url('/static/shop/image.jpg');
+        height: 100vh;
+      }
+  
+      .navbar-right li a:hover {
+        background-color: black;
+      }
+  
+      .navbar-right li:nth-child(5),
+      .navbar-right li:nth-child(6) {
+        background-color: rgb(98, 159, 33);
+        border-radius: 25px;
+        margin: 2px;
+      }
+      
+      footer {
+        background:url('/static/shop/image.jpg');
+      }
+      .navigate li a{
+        position:relative;
+        overflow:hidden;
+        text-decoration:none;
+      }
+      .navigate li a::after{
+        content: '';
+        display:block;
+        height:4px;
+        width: 45%;
+        background-color:#2bd576;
+        transform: scaleX(0);
+        transform-origin:left;
+        transition: transform 0.3s ease;
+        margin-left: 5rem;
+      }
+      .navigate li a:hover::after{
+        transform:scaleX(1);
+      }
+
+
+      {%block css%} {%endblock%}
+    </style>
+  
+</head>
+<body>
+  <div class="container-fluid main">
+    <nav>
+      <div class="container-fluid d-flex">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="sp">T</span>AS<span class="sp">.</span></a>
+        </div>
+        <ul class="nav navbar-nav d-flex flex-row mx-4 justify-content-end navigate">
+          <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000">Home</a></li>
+          <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000/about/">About</a></li>
+          <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000/goals">Goals</a></li>
+          <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000/contact">Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav d-flex flex-row mx-4 justify-content-end">
+          {%block navbar%} {%endblock%}
+        </ul>
+        {% if user.is_authenticated %}
+          <div class="dropdown" style="padding-top:40px;margin-left: 270px;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{request.user}}
+            </button>
+            <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+              <a href="/shop/bidding/" class="dropdown-item">Bidding</a>
+              <a class="dropdown-item" href="/shop/dashboard/">Dashboard </a>
+              {%if request.user.username == "trustedauctionsystem@224466"%}
+                <a class="dropdown-item" href="http://127.0.0.1:8000/administratorlogintowebsite" target="_blank">Admin </a>
+              {%endif%}
+              <a class="dropdown-item" href="/shop/logoutvalidate">Logout</a>
+            </div>
+          </div>
+        {% else %}
+        
+          <ul class="nav navbar-nav d-flex flex-row mx-4 justify-content-end">
+            <li style="padding-top: 23px">
+                <a href="/shop/signup" class="btn btn-success spbtns" style="width: 150px"
+                  ><i class="fa-solid fa-user-plus fa-beat" style="color: #ffffff"></i> Sign
+                  Up</a>
+              </li>
+              <li style="padding-top: 23px">
+                <a href="/shop/login" class="btn btn-success spbtns" style="width: 150px"
+                ><i class="fa-solid fa-right-to-bracket fa-beat" style="color: #ffffff"></i>
+                Login</a>
+              </li>
+          </ul>
+          {% endif %}
+        
+      </div>
+    </nav>
+    
+    {%block insidemain%}
+    {%endblock%}
+  </div>
+  
+  {% block body%} {% endblock %}
+      <footer class="font-small bg-dark text-light position-relative w-100 fixed-bottom">
+        <div class="footer-copyright text-center py-3">
+            &copy; 2023 Copyright
+            <a class="text-decoration-none" href="http://127.0.0.1:8000/">TAS.com</a> Designed by Trusted Auction
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+    {%block js%}
+    {%endblock%}
+  </body>
+</html>
+</body>
+</html>
