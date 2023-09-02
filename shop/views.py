@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import product,contact,usersinformations, bidder , bidwinners
+from .models import product,contact,usersinformations, bidder , winner
 from math import ceil
 from django.conf import settings
 from django.contrib import messages
@@ -25,16 +25,7 @@ def bidding(request):
 
 def products(request,myid):
     prods = product.objects.filter(id=myid)
-    allprod = []
-    catprods = product.objects.values('catagory','id')
-    cats = {item['catagory'] for item in catprods}
-    for cat in cats:
-        prod = product.objects.filter(catagory = cat)
-        n= len(prod)
-        nSlides= n//4 + ceil(n/4 - n//4)
-        allprod.append([prod,range(1,nSlides),nSlides])
-
-    param = {'productview' : prods[0] , 'pid' : myid, 'allprod':allprod}
+    param = {'productview' : prods[0] , 'pid' : myid}
     return render(request,"shop/productview.html",param)
 
 def login(request):
@@ -95,12 +86,18 @@ def productdata(request):
         price = request.POST.get('price','')
         desc = request.POST.get('desc','')
         email = request.POST.get('email','')
+        # image = '/media/shop/images/'+ request.FILES.get('image','')
+        # image = request.FILES.get('image', '')
+        
         image_file = request.FILES.get('image', None)
         if image_file:
+            # Generate a unique file name or use the original file name
             file_name = default_storage.save('shop/images/' + image_file.name, ContentFile(image_file.read()))
             image = file_name
         else:
             image = ''
+        
+        print("**" , image , "**" )
 
         p1 = product(product_name = name, catagory = catagory, sub_catagory = subcatagory,price=price, desc=desc, images = image, useremail = email)
         p1.save()
@@ -127,7 +124,7 @@ def loginvalidation(request):
 
 def logoutvalidate(request):
     logout(request)
-    return render(request , "shop/login.html")
+    return render(request , "index.html")
 def submitbid(request):
     wer = request.user
     em = (wer.email)
@@ -160,9 +157,9 @@ def dashboard(request):
     bidd = objs.count()
     objs = product.objects.filter(useremail = email)
     prods = objs.count()
-    objs = bidwinners.objects.filter(winneremail = email)
+    objs = winner.objects.filter(winneremail = email)
     win = objs.count()
-    total_price = bidwinners.objects.filter(owneremail=email).aggregate(total_price=Sum('price'))
+    total_price = winner.objects.filter(owneremail=email).aggregate(total_price=Sum('price'))
     t_earn = total_price['total_price'] 
     if t_earn == None:
         t_earn = 0
@@ -180,9 +177,8 @@ def mybids(request):
         param = { 'countda' : count}
     else:
         prod = product.objects.filter(id = da[0].pid)
-    objs = bidwinners.objects.filter(winneremail = em)
-    param = {'bidding':da , 'objs':objs,'countda' : count , 'countobj':objs.count()}
-
+    objs = winner.objects.filter(winneremail = em)
+    param = {'bidding':da , 'nameprod' : prod[0],'objs':objs,'countda' : count , 'countobj':objs.count()}
     return render(request,"shop/mybids.html",param)
 
 def results(request):
@@ -231,11 +227,11 @@ def closebid(request,myid):
     mail = obj[0].useremail
     user = usersinformations.objects.filter(useremail = mail)
     
-    data = bidwinners(productid = myid,productname = obj[0].product_name, owneremail = obj[0].useremail,winneremail = objs[0].bemail,price = max_price,
+    data = winner(productid = myid,productname = obj[0].product_name, owneremail = obj[0].useremail,winneremail = objs[0].bemail,price = max_price,
     phonenumber = user[0].phonenumber)
     data.save()
 
-    objs = bidwinners.objects.filter(productid = myid)
+    objs = winner.objects.filter(productid = myid)
     param = {'product' : obj[0],'data':objs[0]}
     instance = bidder.objects.filter(pid=myid)
     instance.delete()

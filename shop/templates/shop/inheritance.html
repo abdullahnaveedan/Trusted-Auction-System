@@ -62,27 +62,6 @@
       footer {
         background:url('/static/shop/image.jpg');
       }
-      .navigate li a{
-        position:relative;
-        overflow:hidden;
-        text-decoration:none;
-      }
-      .navigate li a::after{
-        content: '';
-        display:block;
-        height:4px;
-        width: 45%;
-        background-color:#2bd576;
-        transform: scaleX(0);
-        transform-origin:left;
-        transition: transform 0.3s ease;
-        margin-left: 5rem;
-      }
-      .navigate li a:hover::after{
-        transform:scaleX(1);
-      }
-
-
       {%block css%} {%endblock%}
     </style>
   
@@ -94,7 +73,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#"><span class="sp">T</span>AS<span class="sp">.</span></a>
         </div>
-        <ul class="nav navbar-nav d-flex flex-row mx-4 justify-content-end navigate">
+        <ul class="nav navbar-nav d-flex flex-row mx-4 justify-content-end">
           <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000">Home</a></li>
           <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000/about/">About</a></li>
           <li style="padding-top: 30px;"><a href="http://127.0.0.1:8000/goals">Goals</a></li>
@@ -112,7 +91,7 @@
               <a href="/shop/bidding/" class="dropdown-item">Bidding</a>
               <a class="dropdown-item" href="/shop/dashboard/">Dashboard </a>
               {%if request.user.username == "trustedauctionsystem@224466"%}
-                <a class="dropdown-item" href="http://127.0.0.1:8000/administratorlogintowebsite" target="_blank">Admin </a>
+                <a class="dropdown-item" href="http://127.0.0.1:8000/administratorlogintowebsite">Admin </a>
               {%endif%}
               <a class="dropdown-item" href="/shop/logoutvalidate">Logout</a>
             </div>

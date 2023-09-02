@@ -53,15 +53,4 @@ class winner(models.Model):
     phonenumber = models.IntegerField(default = 0)
     def __str__(self):
         return self.productname
-
     
-class bidwinners(models.Model):
-    winnerid = models.AutoField(primary_key = True)
-    productid =  models.CharField(max_length=50)
-    productname = models.CharField(max_length=50)
-    owneremail = models.CharField(max_length=50)
-    winneremail = models.CharField(max_length=50)
-    price = models.CharField(max_length = 50)
-    phonenumber = models.IntegerField(default = 0)
-    def __str__(self):
-        return self.productname
